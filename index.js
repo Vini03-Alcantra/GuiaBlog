@@ -6,7 +6,7 @@ const connection = require('./database/database.js')
 app.set('view engine', 'ejs');
 
 //Static
-app.set(express.static("public"))
+app.use(express.static('public'))
 
 //Body parser
 app.use(bodyParser.urlencoded({extended: false}));
