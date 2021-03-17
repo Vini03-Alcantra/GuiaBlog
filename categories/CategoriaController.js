@@ -13,6 +13,19 @@ router.get("/admin/categories", (req, res) => {
     })
 });
 
+router.get("/admin/categories/edit/:id", (req, res) => {
+    var id = req.params.id;
+    Category.findByPk(id).then(categoria => {
+        if(categoria != undefined){
+            res.render("admin/categories/edit", {categoria: categoria});
+        }else{
+            res.redirect("/admin/categorias")
+        }
+    }).catch(erro => {
+        res.redirect("/admin/categorias")
+    })
+})
+
 router.post("/categories/save", (req, res) => {
     var title = req.body.title;
     if(title != undefined){
