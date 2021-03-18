@@ -41,6 +41,19 @@ app.get("/", (req, res) => {
     res.render("index")
 })
 
+app.get("/:slug", (req, res) => {
+    var slug = req.params.slug;
+    Article.findOne({
+        where: {
+            slug: slug
+        }
+    }).then(article => {
+        res.redirect("/")
+    }).catch(err => {
+        res.redirect("/")
+    })
+})
+
 app.listen(8001, () => {
     console.log("Hello World")
 })
