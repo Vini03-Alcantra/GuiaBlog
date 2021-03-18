@@ -48,7 +48,11 @@ app.get("/:slug", (req, res) => {
             slug: slug
         }
     }).then(article => {
-        res.redirect("/")
+        if (article != undefined) {
+            res.render("article", {article: article});
+        }else{
+            res.redirect("/")
+        }        
     }).catch(err => {
         res.redirect("/")
     })
