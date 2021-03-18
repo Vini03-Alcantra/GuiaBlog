@@ -10,7 +10,15 @@
             <form method="POST" action="/articles/save">
                 <input type="text" class="form-control" name="title" placeholder="Defina o título do artigo"><br>
                 <textarea name="title" class="form-control" placeholder="Escreva o artigo aqui" id="article"></textarea><br>
-                <button class="btn btn-success">Cadastrar</button>
+                <label for="categoria">Categoria</label>
+                <br><br>
+                <select name="category" id="categoria" class="form-control">
+                    <% categories.forEach((category) => { %>
+                        <option value="<%= category.id %>"><%=category.title%></option>
+                    <% }) %>
+                </select>
+                <br>
+                <button class="btn btn-success">Cadastrar</button>                
             </form>
         </div>
     </div>
