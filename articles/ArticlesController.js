@@ -52,4 +52,20 @@ router.post("/articles/delete", (req, res) => {
     }
 })
 
+router.post("/articles/update", (req, res) => {
+    var id = req.body.id;
+    var title = req.body.title;
+    var slug = req.body.slug;
+    var body = req.body.body;
+    var cartegoriaId = req.body.categoryId;
+
+    Article.update({id: id, title: title, slug: slugify(title), body: body, categoryId: cartegoriaId}, {
+        where: {
+            id: id
+        }
+    }).then(() => [
+        res.redirect("/admin/articles")
+    ])
+})
+
 module.exports = router;
