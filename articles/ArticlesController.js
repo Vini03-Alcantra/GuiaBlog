@@ -18,6 +18,24 @@ router.get("/admin/articles/new", (req, res) => {
     })
 })
 
+router.get("/admin/articles/edit/:id", (req, res) => {
+    var id = req.params.id;
+    if (isNaN(id)) {
+        res.redirect("/admin/articles")
+    }
+    Article.findByPk(id).then(article => {
+        if (article != undefined) {
+            Category.findAll().then(categories => {
+                res.render("admin/articles/edit", {article: article, categories: categories});
+            })
+        }else{
+            res.redirect("/admin/articles")
+        }
+    }).catch(() => {
+        res.redirect("/admin/articles")
+    })
+})
+
 router.post("/articles/save", (req, res) => {
     var title = req.body.title;
     var body = req.body.body;
@@ -57,9 +75,9 @@ router.post("/articles/update", (req, res) => {
     var title = req.body.title;
     var slug = req.body.slug;
     var body = req.body.body;
-    var cartegoriaId = req.body.categoryId;
+    var cartegoriaTitle = req.body.category;
 
-    Article.update({id: id, title: title, slug: slugify(title), body: body, categoryId: cartegoriaId}, {
+    Article.update({id: id, title: title, slug: slugify(title), body: body, categoryId: cartegoriaTitle}, {
         where: {
             id: id
         }
