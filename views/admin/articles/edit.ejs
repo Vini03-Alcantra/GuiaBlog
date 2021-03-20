@@ -9,7 +9,9 @@
         <div class="card-body">
             <form action="/articles/update" method="POST">
                 <input type="text" class="form-control" name="title" value="<%= article.title %>" placeholder="Defina o título do artigo"><br>
-                <textarea name="body" class="form-control" placeholder="Escreva o artigo aqui" id="article"></textarea><br>
+                <textarea name="body" class="form-control" placeholder="Escreva o artigo aqui" id="article">
+                    <%= article.body %>
+                </textarea><br>
                 <label for="categoria">Categoria</label>
                 <br>
                 <select name="category"  id="categoria" class="form-control">
@@ -24,14 +26,22 @@
     </div>
 </div>
 
+<div id="content" style="display: none;">
+    <%= article.body %>
+</div>
+
 <%- include('../../partials/footer') -%>
 <script src="/tinymce/tinymce.min.js"></script>
 <script>
     tinymce.init({
         language: 'pt_BR',
         selector: "#article",
+        activeEditor: true,
         plugins: [
             'advlist autolink link image lists print preview hr searchplace wordcount fullscreen insertdatetime media save table paste emoticons'
-        ]
+        ],
+        init_instance_callback: () => {
+            tinymce.get("article").setContent($("#content").html())
+        }
     })
 </script>
