@@ -5,10 +5,11 @@ const connection = require('./database/database.js')
 
 const categoriesController = require("./categories/CategoriaController")
 const articlesController = require("./articles/ArticlesController")
+const usersControllers = require("./users/UsersController")
 
 const Article = require("./articles/Article");
 const Category = require("./categories/Category")
-
+const Users = require("./users/Users");
 //View Engine
 app.set('view engine', 'ejs');
 
@@ -30,6 +31,7 @@ connection
 
 app.use("/", categoriesController);
 app.use("/", articlesController)
+app.use("/", usersControllers)
 
 app.get("/", (req, res) => {
     Article.findAll({
