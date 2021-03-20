@@ -1,1 +1,20 @@
-<h1>Renderizando Usuário</h1>
+<%- include('../../partials/header') -%>
+<%- include('../../partials/navbar') -%>
+<div class="container">
+    <hr>
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2>Criação de usuário</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/users/create" >
+                <input name="email" type="text" class="form-control" placeholder="seuemail@email.com.br"><br>
+                <input name="password" type="password" class="form-control" placeholder="********"><br>
+                <button type="submit" class="btn btn-success btn-block">Criar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<%- include('../../partials/footer') -%>
