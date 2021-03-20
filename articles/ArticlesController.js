@@ -73,17 +73,18 @@ router.post("/articles/delete", (req, res) => {
 router.post("/articles/update", (req, res) => {
     var id = req.body.id;
     var title = req.body.title;
-    var slug = req.body.slug;
     var body = req.body.body;
-    var cartegoriaTitle = req.body.category;
+    var cartegoria = req.body.category;
 
-    Article.update({id: id, title: title, slug: slugify(title), body: body, categoryId: cartegoriaTitle}, {
+    Article.update({title: title, slug: slugify(title), body: body, categoryId: cartegoria}, {
         where: {
             id: id
         }
-    }).then(() => [
+    }).then(() => {
         res.redirect("/admin/articles")
-    ])
+    }).catch(err => {
+        res.redirect("/")
+    })
 })
 
 module.exports = router;
