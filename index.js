@@ -66,7 +66,7 @@ app.get("/:slug", (req, res) => {
         }else{
             res.redirect("/")
         }        
-    }).catch(err => {
+    }).catch(() => {
         res.redirect("/")
     })
 })
@@ -86,7 +86,7 @@ app.get("/category/:slug", (req, res) => {
         }else{
             res.redirect("/")
         }
-    }).catch(err => {
+    }).catch(() => {
         res.redirect("/")
     })
 })
